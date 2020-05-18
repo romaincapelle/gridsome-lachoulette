@@ -105,9 +105,7 @@ export default {
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: this.encode({
-          ...this.completeFormData,
-        }),
+        body: this.completeFormData,
       })
         .then(() => (this.notComplete = false))
         .catch((error) => alert(error));
