@@ -6,9 +6,6 @@
       v-on:submit.prevent="handleSubmit"
       data-netlify="true"
     >
-      <p hidden>
-        <label> Don’t fill this out: <input name="bot-field" /> </label>
-      </p>
       <div class="sender-info">
         <div>
           <label for="name" class="label" >Votre nom :</label>
