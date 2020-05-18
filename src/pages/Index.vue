@@ -1,14 +1,13 @@
 <template>
   <Layout>
     <form v-if="notComplete"
-      name="contact"
+      name="drive-choulette"
       method="post"
       v-on:submit.prevent="handleSubmit"
-      action="/success/"
       data-netlify="true"
       data-netlify-honeypot="bot-field"
     >
-      <input type="hidden" name="form-name" value="contact" />
+      <input type="hidden" name="form-name" value="drive-choulette" />
       <p hidden>
         <label> Don’t fill this out: <input name="bot-field" /> </label>
       </p>
@@ -105,7 +104,10 @@ export default {
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: this.completeFormData,
+        body: this.encode({
+          "form-name": "drive-choulette",
+          ...this.completeFormData,
+        }),
       })
         .then(() => (this.notComplete = false))
         .catch((error) => alert(error));
