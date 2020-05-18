@@ -32,57 +32,35 @@
         </div>
         <div>
           <label for="enlevement">Le jour d’enlèvement :</label>
-          <input type="date" name="enlevement" v-model="formData.enlevement" />
+            <input type="date" name="enlevement" v-model="formData.enlevement" />
+          </div>
         </div>
 
-        <div class="message-wrapper">
-          <label for="message">Message</label>
-          <textarea name="message" v-model="formData.message"></textarea>
-        </div>
-
-        <div>
-          <label for="naissance">Date de naissance :</label>
-          <input
-            type="date"
-            max="0"
-            name="naissance"
-            v-model="formData.naissance"
-          />
-        </div>
-        <Order :updatedOrder.sync="updatedOrder" />
+      <div class="message-wrapper">
+        <label for="message">Message</label>
+        <textarea name="message" v-model="formData.message"></textarea>
       </div>
+
+      <div>
+          <label for="naissance">Date de naissance :</label>
+          <input type="date" max="0" name="naissance" v-model="formData.naissance" />
+        </div>
+      </div>
+
       <button type="submit">Submit form</button>
     </form>
   </Layout>
 </template>
 
 <script>
-import Order from '../components/Order';
-
 export default {
   metaInfo: {
     title: 'Hello, world!',
   },
-  components: {
-    Order,
-  },
   data() {
     return {
       formData: {},
-      updatedOrder: [],
     };
-  },
-  computed: {
-    completeData: function() {
-      const formData = this.formData;
-      const updatedOrder = this.updatedOrder;
-      let obj = {};
-      updatedOrder.forEach((item) => {
-        obj[item.nomDeLaBiere] = item.nombreDeBiere;
-      });
-      const completeData = { ...formData, ...obj };
-      return completeData;
-    },
   },
   methods: {
     encode(data) {
