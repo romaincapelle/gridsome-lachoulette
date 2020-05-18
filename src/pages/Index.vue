@@ -14,20 +14,42 @@
       </p>
       <div class="sender-info">
         <div>
-          <label for="name" class="label">Your name</label>
+          <label for="name" class="label">Votre nom :</label>
           <input type="text" name="name" v-model="formData.name" />
         </div>
         <div>
-          <label for="email">Your email</label>
+          <label for="email">Votre email :</label>
           <input type="email" name="email" v-model="formData.email" />
         </div>
-      </div>
+        <div>
+          <label for="phone">Votre numéro de téléphone :</label>
+          <input
+            placeholder="ex: 0327357244"
+            type="text"
+            name="phone"
+            v-model="formData.phone"
+          />
+        </div>
+        <div>
+          <label for="enlevement">Le jour d’enlèvement :</label>
+          <input type="date" name="enlevement" v-model="formData.enlevement" />
+        </div>
 
-      <div class="message-wrapper">
-        <label for="message">Message</label>
-        <textarea name="message" v-model="formData.message"></textarea>
-      </div>
+        <div class="message-wrapper">
+          <label for="message">Message</label>
+          <textarea name="message" v-model="formData.message"></textarea>
+        </div>
 
+        <div>
+          <label for="naissance">Date de naissance :</label>
+          <input
+            type="date"
+            max="0"
+            name="naissance"
+            v-model="formData.naissance"
+          />
+        </div>
+      </div>
       <button type="submit">Submit form</button>
     </form>
   </Layout>

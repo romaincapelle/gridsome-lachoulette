@@ -1,13 +1,12 @@
 <template>
   <div class="layout">
-    <header class="header">
-      <g-image alt="Logo Choulette" src="~/favicon.png" width="35" />
-
+    <header>
+      <br />
       <strong>
         <h1>Bienvenue sur le drive de La Choulette</h1>
         <p>
-          Du lundi au vendredi de 8h à 12h et de 14h à 18h + le samedi matin de
-          9h à 12h
+          Ouvert du lundi au vendredi de 8h à 12h et de 14h à 18h et le samedi
+          matin de 9h à 12h
         </p>
       </strong>
     </header>
