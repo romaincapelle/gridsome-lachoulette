@@ -49,6 +49,7 @@
             v-model="formData.naissance"
           />
         </div>
+        <Order :updatedOrder.sync="updatedOrder" />
       </div>
       <button type="submit">Submit form</button>
     </form>
@@ -56,14 +57,32 @@
 </template>
 
 <script>
+import Order from '../components/Order';
+
 export default {
   metaInfo: {
     title: 'Hello, world!',
   },
+  components: {
+    Order,
+  },
   data() {
     return {
       formData: {},
+      updatedOrder: [],
     };
+  },
+  computed: {
+    completeData: function() {
+      const formData = this.formData;
+      const updatedOrder = this.updatedOrder;
+      let obj = {};
+      updatedOrder.forEach((item) => {
+        obj[item.nomDeLaBiere] = item.nombreDeBiere;
+      });
+      const completeData = { ...formData, ...obj };
+      return completeData;
+    },
   },
   methods: {
     encode(data) {

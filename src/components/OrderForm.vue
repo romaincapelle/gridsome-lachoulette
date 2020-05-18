@@ -1,0 +1,117 @@
+<template>
+  <form @submit.prevent="submit" id="todo-form">
+    <input
+      type="number"
+      min="1"
+      max="1000"
+      placeholder="Ex: 24"
+      v-model.number="order.nombreDeBiere"
+    />
+    <select v-model="order.nomDeLaBiere" class="select-css">
+      <option v-for="biere in bieres" :value="biere.text">
+        {{ biere.text }}
+      </option>
+    </select>
+
+    <button type="submit" title="save">Ajouter</button>
+    <button
+      type="button"
+      title="cancel"
+      class="cancel-button"
+      @click="close"
+      v-if="!populateWith.empty"
+    >
+      +
+    </button>
+  </form>
+</template>
+
+<script>
+export default {
+  name: 'OrderForm',
+  props: {
+    populateWith: {
+      type: Object,
+      default: () => ({ empty: true }),
+    },
+  },
+  data() {
+    return {
+      order: {
+        nomDeLaBiere: '',
+        nombreDeBiere: 0,
+      },
+      selectedOption: 'C',
+      bieres: [
+        { text: 'Biere Blonde' },
+        { text: 'Biere Brune' },
+        { text: 'Biere Ambrée' },
+      ],
+    };
+  },
+  methods: {
+    clearForm() {
+      this.order = {
+        nomDeLaBiere: '',
+        nombreDeBiere: null,
+      };
+    },
+    submit() {
+      if (
+        this.order.nomDeLaBiere !== '' &&
+        this.order.nombreDeBiere !== null &&
+        this.order.nombreDeBiere >= 1 &&
+        this.order.nombreDeBiere <= 1000
+      ) {
+        this.$emit('submit', this.order);
+        this.clearForm();
+        this.close();
+      }
+    },
+    close() {
+      this.$emit('close');
+    },
+  },
+  created() {
+    if (!this.populateWith.empty) {
+      this.order = this.populateWith;
+    }
+  },
+};
+</script>
+
+<style scoped>
+#todo-form {
+  display: flex;
+  margin: 24px;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+label {
+  margin-right: 16px;
+}
+
+input {
+  display: block;
+  margin: 8px 0;
+  padding: 8px;
+  border-radius: 3px;
+  border: 0.5px solid rgba(0, 0, 0, 0.15);
+}
+
+input:focus {
+  border: 0.5px solid #42b983;
+  outline: 0;
+  box-shadow: none;
+}
+
+.cancel-button {
+  font-size: 0.83em;
+}
+
+button:active {
+  background-color: #42b983;
+  color: white;
+}
+</style>
