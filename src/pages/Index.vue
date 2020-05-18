@@ -1,6 +1,6 @@
 <template>
   <Layout>
-    <form
+    <form v-if="notComplete"
       name="contact"
       method="post"
       v-on:submit.prevent="handleSubmit"
@@ -50,15 +50,21 @@
       <order :updatedbeers.sync="updatedbeers" />
       <button type="submit">Submit form</button>
     </form>
-    <p>formData</p>
-    <p>{{ formData }}</p>
-    <p>updatedbeers</p>
-    <p>{{ updatedbeers }}</p>
-    <p>completeFormData</p>
-    <p>{{ completeFormData }}</p>
+    <section v-else>
+      <h5>
+        Nous avons recu votre commande et nous vous attendons a la brasserie.
+      </h5>
+      <h4>16 Rue des Écoles 59111 Hordain</h4>
+      <p>Pour toute questions, veuillez nous contacter au +33 3 27 35 72 44</p>
+      <p>formData</p>
+      <p>{{ formData }}</p>
+      <p>updatedbeers</p>
+      <p>{{ updatedbeers }}</p>
+      <p>completeFormData</p>
+      <p>{{ completeFormData }}</p>
+    </section>
   </Layout>
 </template>
-
 <script>
 import Order from '../components/Order'
 export default {
@@ -70,6 +76,7 @@ export default {
   },
   data() {
     return {
+      notComplete: true,
       formData: {},
       updatedbeers: [],
     };
@@ -99,11 +106,10 @@ export default {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: this.encode({
-          'form-name': e.target.getAttribute('name'),
           ...this.completeFormData,
         }),
       })
-        .then(() => this.$router.push('/About'))
+        .then(() => (this.notComplete = false))
         .catch((error) => alert(error));
     },
   },
