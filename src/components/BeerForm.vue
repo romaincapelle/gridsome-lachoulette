@@ -1,9 +1,7 @@
 <template>
   <form @submit.prevent="submit" id="biere-form">
     <input
-      type="number"
-      min="1"
-      max="1000"
+      type="text"
       placeholder="Ex: 24"
       v-model.number="biere.nombreDeBiere"
     />
