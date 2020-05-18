@@ -1,11 +1,17 @@
 <template>
   <Layout>
     <form v-if="notComplete"
-      name="drive-choulette"
+      name="contact"
       method="post"
       v-on:submit.prevent="handleSubmit"
+      action="/success/"
       data-netlify="true"
+      data-netlify-honeypot="bot-field"
     >
+      <input type="hidden" name="form-name" value="contact" />
+      <p hidden>
+        <label> Don’t fill this out: <input name="bot-field" /> </label>
+      </p>
       <div class="sender-info">
         <div>
           <label for="name" class="label" >Votre nom :</label>
@@ -95,12 +101,12 @@ export default {
         )
         .join('&');
     },
-    handleSubmit(e) {
+    handleSubmit() {
       fetch('/', {
         method: 'POST',
         headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
         body: this.encode({
-          "form-name": "drive-choulette",
+          'form-name': "contact"
           ...this.completeFormData,
         }),
       })
